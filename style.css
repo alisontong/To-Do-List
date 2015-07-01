@@ -1,0 +1,19 @@
+body {
+  font-size: 16px;
+  background-image: url("http://www.lindsayafranklin.com/wp-content/uploads/2011/08/Paper-and-Pencil.jpg");
+  background-color: #cccccc;
+  background-size: 105%;
+}
+
+.todo:hover, .todo.done {
+  cursor: pointer;
+  text-decoration: line-through;
+}
+.btn-danger {
+  position: absolute;
+  left: 40%;
+  width: 300px;
+}
+ {
+  background-color: white;
+}
