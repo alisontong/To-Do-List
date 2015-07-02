@@ -25,27 +25,56 @@ $(function() {
     // });
 
   // store our seed data into the template and injects it into the html
-  _.each(toDos, function (toDo, index) {
-    var $toDo = $(todoTemplate(toDo));
-    $toDo.attr('data-index', index);
-    $toDoList.append($toDo);
-  });
+      // _.each(toDos, function (toDo, index) {
+      //   var $toDo = $(todoTemplate(toDo));
+      //   $toDo.attr('data-index', index);
+      //   $toDoList.append($toDo);
+      // });
 
   // submit form to create new todo
   $newToDo.on('submit', function(event) {
     event.preventDefault();
 
-    // create new todo object from form data
     var toDoName = $('#todo-name').val();
     var toDoDesc = $('#todo-desc').val();
-    var toDoData = {name: toDoName, desc: toDoDesc};
-    toDos.push(toDoData);
+    // var toDoData = {name: toDoName, desc: toDoDesc};
+    var toDo = new ToDo(toDoName, toDoDesc);
 
 
-    // append our new todo to the page
-    // $toDoList.append('<li class="todo">' + toDoData.name + ' - ' + toDoData.desc + '</li>');
-    var $toDo = $(todoTemplate(toDoData));
-    $toDoList.append($toDo);
+    function ToDo (toDoName, toDoDesc) {
+      this.name = toDoName;
+      this.desc = toDoDesc;
+    }
+
+    ToDo.all = [];
+
+
+    //function to add todo to ToDo.all
+    ToDo.prototype.save = function (toDoName, toDoDesc) {
+      ToDo.all.push(toDo);
+    }    
+    toDo.save();
+
+
+
+    // create new todo object from form data
+      // var toDoName = $('#todo-name').val();
+      // var toDoDesc = $('#todo-desc').val();
+      // var toDoData = {name: toDoName, desc: toDoDesc};
+      // toDos.push(toDoData);
+    ToDo.prototype.render = function (toDoName, toDoData) {
+      var index = ToDo.all.indexOf(toDo);
+      var $toDo = $(todoTemplate(toDo));
+      $toDo.attr('data-index', index);
+      $toDoList.append($toDo);
+    }
+    toDo.render();
+    // var index = ToDo.all.indexOf(toDoData);
+    // // append our new todo to the page
+    // // $toDoList.append('<li class="todo">' + toDoData.name + ' - ' + toDoData.desc + '</li>');
+    // var $toDo = $(todoTemplate(toDoData));
+    // $toDo.attr('data-index', index);
+    // $toDoList.append($toDo);
     
 
     // reset the form
@@ -79,12 +108,9 @@ $(function() {
 
 
 });
- var toDos = [
-    {name: "laundry", desc: "clean clothes"},
-    {name: "grocery shopping", desc: "buy food"},
-    {name: "nap time", desc: "remember to sleep!"}
-  ];
+ // var toDos = [
+ //    {name: "laundry", desc: "clean clothes"},
+ //    {name: "grocery shopping", desc: "buy food"},
+ //    {name: "nap time", desc: "remember to sleep!"}
+ //  ];
 
-  function call() {
-    console.log(toDos);
-  }
